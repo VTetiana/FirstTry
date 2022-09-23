@@ -9,7 +9,7 @@ h1 {
 }
 
 .main {
-  background-image: url(src/weather.jpg);
+  background-image: url("./src/weather.jpg");
   background-color: transparent;
   border: 1px solid;
   border-radius: 15px;
