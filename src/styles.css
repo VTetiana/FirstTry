@@ -29,7 +29,7 @@ form {
   display: inline;
 }
 
-a {
+.location {
   position: relative;
   left: 10px;
   color: rgb(187, 251, 251);
