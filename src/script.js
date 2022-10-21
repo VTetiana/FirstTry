@@ -45,6 +45,8 @@ function search(event) {
 
     let cityTemp = document.querySelector("#temperature");
     cityTemp.innerHTML = `${temperature}`;
+    let weatherDescription = document.querySelector("#description");
+    weatherDescription.innerHTML = response.data.weather[0].description;
     let windCurrent = Math.round(response.data.wind.speed);
     let wind = document.querySelector("#wind");
     wind.innerHTML = windCurrent;
