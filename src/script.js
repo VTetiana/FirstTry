@@ -33,6 +33,7 @@ function search(event) {
   }
 
   function showTemperature(response) {
+    console.log(response.data);
     let temperature = Math.round(response.data.main.temp);
     console.log(temperature);
 
@@ -45,7 +46,11 @@ function search(event) {
     let windCurrent = Math.round(response.data.wind.speed);
     let wind = document.querySelector("#wind");
     wind.innerHTML = windCurrent;
-
+    let iconElement = document.querySelector("#icon");
+    iconElement.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
     let feelsLike = Math.round(response.data.main.temp);
     let feelsLikeCurrent = document.querySelector("#feelsLike");
     feelsLikeCurrent.innerHTML = `${feelsLike}`;
@@ -70,6 +75,12 @@ function currentLocation(event) {
       let cityCurrent = response.data.name;
       let currentCity = document.querySelector("#city");
       currentCity.innerHTML = cityCurrent;
+      let iconElement = document.querySelector("#icon");
+      iconElement.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+      );
+
       let temperature = Math.round(response.data.main.temp);
       console.log(temperature);
       let cityTempCurrent = document.querySelector("#temperature");
