@@ -85,10 +85,13 @@ function currentLocation(event) {
       console.log(temperature);
       let cityTempCurrent = document.querySelector("#temperature");
       cityTempCurrent.innerHTML = `${temperature}`;
+      let dateTime = document.querySelector("#time");
+      dateTime.innerHTML = formatDate(response.data.dt * 1000);
       let windCurrent = Math.round(response.data.wind.speed);
       let wind = document.querySelector("#wind");
       wind.innerHTML = windCurrent;
-
+      let weatherDescription = document.querySelector("#description");
+      weatherDescription.innerHTML = response.data.weather[0].description;
       let feelsLike = Math.round(response.data.main.temp);
       let feelsLikeCurrent = document.querySelector("#feelsLike");
       feelsLikeCurrent.innerHTML = `${feelsLike}`;
