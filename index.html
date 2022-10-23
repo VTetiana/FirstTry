@@ -23,14 +23,24 @@
       <div class="main">
         <h1>Weather forecast for you</h1>
 
-        <form id="search-city">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter the city"
-            id="entered-city"
-          />
-          <input type="submit" value="Search" class="btn btn-primary" />
+        <form id="search-city" class="mb-2">
+          <div class="row">
+            <div class="col-9">
+              <input
+                type="search"
+                class="form-control"
+                placeholder="Enter the city"
+                id="entered-city"
+              />
+            </div>
+            <div class="col-3">
+              <input
+                type="submit"
+                value="Search"
+                class="btn btn-primary w-100"
+              />
+            </div>
+          </div>
         </form>
 
         <a href="" class="location" id="current">Use your current location</a>
