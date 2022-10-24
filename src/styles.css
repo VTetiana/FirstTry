@@ -106,6 +106,7 @@ p::first-letter {
   margin-left: 80px;
 }
 
-.fahrenheit {
+.fahrenheit,
+.celsius {
   text-decoration: none;
 }
