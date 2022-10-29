@@ -110,3 +110,12 @@ p::first-letter {
 .celsius {
   text-decoration: none;
 }
+.weather-forecast {
+  text-align: center;
+}
+.mini-icon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
