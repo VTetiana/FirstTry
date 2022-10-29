@@ -129,3 +129,27 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemp);
 
 let celsiusTemp = null;
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = `
+      <div class="row">
+        <div class="col-2">
+          <div class="card">
+            <div class="days">Tuesday</div>
+            <img
+              class="mini-icon"
+              src="http://openweathermap.org/img/wn/10d@2x.png"
+              alt=""
+              width="36"
+            />
+            <div class="weather-forecast-temperature">
+              <span class="high">22°C </span>
+              <span class="night">18°C</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+}
+displayForecast();
