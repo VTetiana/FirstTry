@@ -132,11 +132,15 @@ let celsiusTemp = null;
 
 function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML = `
-      <div class="row">
+  let forecastHTML = `<div class="row">`;
+  let days = ["Monday", "Tuesday", "Wednesday"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
         <div class="col-2">
           <div class="card">
-            <div class="days">Tuesday</div>
+            <div class="days">${day}</div>
             <img
               class="mini-icon"
               src="http://openweathermap.org/img/wn/10d@2x.png"
@@ -149,7 +153,10 @@ function displayForecast() {
             </div>
           </div>
         </div>
-      </div>
-    `;
+          `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 displayForecast();
