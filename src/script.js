@@ -57,6 +57,7 @@ function search(event) {
     let feelsLike = Math.round(response.data.main.temp);
     let feelsLikeCurrent = document.querySelector("#feelsLike");
     feelsLikeCurrent.innerHTML = `${feelsLike}`;
+    getForecast(response.data.coord);
   }
 
   axios.get(`${apiUrl}`).then(showTemperature);
@@ -98,6 +99,7 @@ function currentLocation(event) {
       let feelsLike = Math.round(response.data.main.temp);
       let feelsLikeCurrent = document.querySelector("#feelsLike");
       feelsLikeCurrent.innerHTML = `${feelsLike}`;
+      getForecast(response.data.coord);
     }
 
     axios.get(`${apiUrl}`).then(showTemperature);
@@ -160,3 +162,10 @@ function displayForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 displayForecast();
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "ao50e3b0a84a53f40a5t45f8983e4eb2";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
+  console.log(apiUrl);
+}
