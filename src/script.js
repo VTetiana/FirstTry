@@ -133,26 +133,26 @@ celsiusLink.addEventListener("click", showCelsiusTemp);
 let celsiusTemp = null;
 
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Monday", "Tuesday", "Wednesday"];
-  days.forEach(function (day) {
+
+  forecast.forEach(function (forecastDay) {
     forecastHTML =
       forecastHTML +
       `
         <div class="col-2">
           <div class="card">
-            <div class="days">${day}</div>
+            <div class="days">${forecastDay.dt}</div>
             <img
               class="mini-icon"
-              src="http://openweathermap.org/img/wn/10d@2x.png"
+              src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
               alt=""
               width="36"
             />
             <div class="weather-forecast-temperature">
-              <span class="high">22°C </span>
-              <span class="night">18°C</span>
+              <span class="high">${forecastDay.temp.max}°C </span>
+              <span class="night">${forecastDay.temp.min}°C</span>
             </div>
           </div>
         </div>
