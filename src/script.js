@@ -132,7 +132,8 @@ celsiusLink.addEventListener("click", showCelsiusTemp);
 
 let celsiusTemp = null;
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   let days = ["Monday", "Tuesday", "Wednesday"];
@@ -161,11 +162,11 @@ function displayForecast() {
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
-displayForecast();
 
 function getForecast(coordinates) {
   console.log(coordinates);
   let apiKey = "ao50e3b0a84a53f40a5t45f8983e4eb2";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
-  console.log(apiUrl);
+
+  axios.get(apiUrl).then(displayForecast);
 }
