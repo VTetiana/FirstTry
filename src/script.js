@@ -132,31 +132,50 @@ celsiusLink.addEventListener("click", showCelsiusTemp);
 
 let celsiusTemp = null;
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[day];
+}
+
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
 
-  forecast.forEach(function (forecastDay) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 4) {
+      forecastHTML =
+        forecastHTML +
+        `
         <div class="col-2">
           <div class="card">
-            <div class="days">${forecastDay.dt}</div>
+            <div class="days">${formatDay(forecastDay.dt)}</div>
             <img
               class="mini-icon"
-              src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
+              src="http://openweathermap.org/img/wn/${
+                forecastDay.weather[0].icon
+              }@2x.png"
               alt=""
               width="36"
             />
             <div class="weather-forecast-temperature">
-              <span class="high">${forecastDay.temp.max}°C </span>
-              <span class="night">${forecastDay.temp.min}°C</span>
+              <span class="high">${Math.round(forecastDay.temp.max)}°C </span>
+              <span class="night">${Math.round(forecastDay.temp.min)}°C</span>
             </div>
           </div>
         </div>
           `;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
