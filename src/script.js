@@ -1,70 +1,71 @@
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  let time = `${day} ${hours}:${minutes}`;
+  return time;
+}
+function showTemperature(response) {
+  console.log(response.data);
+
+  celsiusTemp = response.data.main.temp;
+
+  let temperature = Math.round(celsiusTemp);
+  console.log(temperature);
+
+  let cityTemp = document.querySelector("#temperature");
+  cityTemp.innerHTML = `${temperature}`;
+  let dateTime = document.querySelector("#time");
+  dateTime.innerHTML = formatDate(response.data.dt * 1000);
+  let weatherDescription = document.querySelector("#description");
+  weatherDescription.innerHTML = response.data.weather[0].description;
+  let windCurrent = Math.round(response.data.wind.speed);
+  let wind = document.querySelector("#wind");
+  wind.innerHTML = windCurrent;
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  let feelsLike = Math.round(response.data.main.temp);
+  let feelsLikeCurrent = document.querySelector("#feelsLike");
+  feelsLikeCurrent.innerHTML = `${feelsLike}`;
+  getForecast(response.data.coord);
+}
+
+function searchCity(city) {
+  let apiKey = "c7763e3941cdedda26666f22c5122f53";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(`${apiUrl}`).then(showTemperature);
+}
 function search(event) {
   event.preventDefault();
   let enteredCity = document.querySelector("#entered-city");
   let currentCity = document.querySelector("#city");
   currentCity.innerHTML = enteredCity.value;
-  console.log(enteredCity.value);
-  let apiKey = "c7763e3941cdedda26666f22c5122f53";
-  let city = enteredCity.value;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-  function formatDate(timestamp) {
-    let date = new Date(timestamp);
-    let hours = date.getHours();
-    if (hours < 10) {
-      hours = `0${hours}`;
-    }
-    let minutes = date.getMinutes();
-    if (minutes < 10) {
-      minutes = `0${minutes}`;
-    }
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    let day = days[date.getDay()];
-    let time = `${day} ${hours}:${minutes}`;
-    return time;
-  }
-
-  function showTemperature(response) {
-    console.log(response.data);
-
-    celsiusTemp = response.data.main.temp;
-
-    let temperature = Math.round(celsiusTemp);
-    console.log(temperature);
-
-    let cityTemp = document.querySelector("#temperature");
-    cityTemp.innerHTML = `${temperature}`;
-    let dateTime = document.querySelector("#time");
-    dateTime.innerHTML = formatDate(response.data.dt * 1000);
-    let weatherDescription = document.querySelector("#description");
-    weatherDescription.innerHTML = response.data.weather[0].description;
-    let windCurrent = Math.round(response.data.wind.speed);
-    let wind = document.querySelector("#wind");
-    wind.innerHTML = windCurrent;
-    let iconElement = document.querySelector("#icon");
-    iconElement.setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
-    let feelsLike = Math.round(response.data.main.temp);
-    let feelsLikeCurrent = document.querySelector("#feelsLike");
-    feelsLikeCurrent.innerHTML = `${feelsLike}`;
-    getForecast(response.data.coord);
-  }
-
-  axios.get(`${apiUrl}`).then(showTemperature);
+  searchCity(enteredCity.value);
 }
 
 let form = document.querySelector("#search-city");
 form.addEventListener("submit", search);
+
+searchCity("Sumy");
 
 function currentLocation(event) {
   event.preventDefault();
